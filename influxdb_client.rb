@@ -6,11 +6,6 @@ if ARGV.size != 4 then
   puts "Usage: host database key value"
   exit(1)
 end
-puts ARGV[0]
-puts ARGV[1]
-puts ARGV[2]
-puts ARGV[3]
-
 
 host     = ARGV[0]
 database = ARGV[1]
@@ -21,7 +16,7 @@ influxdb = InfluxDB::Client.new database, :host => host, :time_precision => time
 NAMES = [ARGV[2]]
 NAMES.each do |name|
   data = {
-    values: {value: ARGV[3].to_i},
+    values: {value: ARGV[3].to_f},
     timestamp: Time.now.to_i
   }
   influxdb.write_point(name, data)
